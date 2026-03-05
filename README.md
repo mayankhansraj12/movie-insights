@@ -8,7 +8,7 @@ Built with **Next.js 14**, **Groq AI** (`llama-3.1-8b-instant`), **OMDB API**, a
 
 ## Live Demo
 
-_[Add your Vercel URL here after deploying]_
+https://movie-insights.mayankhansraj.me
 
 ---
 
