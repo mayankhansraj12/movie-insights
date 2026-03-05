@@ -1,0 +1,258 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================
+   CSS Custom Properties — Design Tokens
+   Light mode defaults, dark mode overrides
+   ============================================ */
+
+:root {
+  /* Backgrounds */
+  --bg-base: #f7f6f3;
+  --bg-surface: #ffffff;
+  --bg-elevated: #f0eff4;
+  --bg-input: #f4f3f0;
+
+  /* Text */
+  --text-primary: #0f0f1a;
+  --text-secondary: #4a4a62;
+  --text-muted: #8888a0;
+
+  /* Borders */
+  --border-subtle: #e8e7ef;
+  --border-default: #d4d3de;
+  --border-strong: #b8b7c8;
+
+  /* Accent gold */
+  --accent: #c9940e;
+  --accent-hover: #b07d08;
+  --accent-muted: rgba(201, 148, 14, 0.08);
+  --glow-accent: 0 0 20px rgba(201, 148, 14, 0.12);
+
+  /* Sentiment */
+  --positive: #17a853;
+  --positive-bg: rgba(23, 168, 83, 0.08);
+  --positive-border: rgba(23, 168, 83, 0.25);
+  --mixed: #d97706;
+  --mixed-bg: rgba(217, 119, 6, 0.08);
+  --mixed-border: rgba(217, 119, 6, 0.25);
+  --negative: #dc4040;
+  --negative-bg: rgba(220, 64, 64, 0.08);
+  --negative-border: rgba(220, 64, 64, 0.25);
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.10), 0 12px 32px rgba(0, 0, 0, 0.08);
+
+  /* Skeleton */
+  --skeleton-base: #e8e7ef;
+  --skeleton-highlight: #f0eff6;
+}
+
+[data-theme="dark"] {
+  /* Backgrounds */
+  --bg-base: #09090e;
+  --bg-surface: #111118;
+  --bg-elevated: #1a1a26;
+  --bg-input: #16161f;
+
+  /* Text */
+  --text-primary: #f0eff4;
+  --text-secondary: #9898b0;
+  --text-muted: #52526a;
+
+  /* Borders */
+  --border-subtle: #1e1e2e;
+  --border-default: #2e2e45;
+  --border-strong: #44445a;
+
+  /* Accent gold */
+  --accent: #e8b84b;
+  --accent-hover: #f0c860;
+  --accent-muted: rgba(232, 184, 75, 0.10);
+  --glow-accent: 0 0 20px rgba(232, 184, 75, 0.15);
+
+  /* Sentiment */
+  --positive: #3ecf74;
+  --positive-bg: rgba(62, 207, 116, 0.08);
+  --positive-border: rgba(62, 207, 116, 0.25);
+  --mixed: #f59e0b;
+  --mixed-bg: rgba(245, 158, 11, 0.08);
+  --mixed-border: rgba(245, 158, 11, 0.25);
+  --negative: #f26464;
+  --negative-bg: rgba(242, 100, 100, 0.08);
+  --negative-border: rgba(242, 100, 100, 0.25);
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.5), 0 8px 24px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.6), 0 16px 40px rgba(0, 0, 0, 0.4);
+
+  /* Skeleton */
+  --skeleton-base: #1a1a26;
+  --skeleton-highlight: #242436;
+}
+
+/* =============================================
+   Smooth color transitions on theme switch
+   ============================================ */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0ms !important;
+    transition-duration: 0ms !important;
+  }
+}
+
+/* =============================================
+   Base Styles
+   ============================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  /* System font stack — works offline, looks native on every OS */
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont,
+    'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =============================================
+   Keyframe Animations
+   ============================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes badgePop {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(-4px);
+  }
+
+  40% {
+    transform: translateX(4px);
+  }
+
+  60% {
+    transform: translateX(-4px);
+  }
+
+  80% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =============================================
+   Utility Classes
+   ============================================ */
+
+.animate-fade-in-up {
+  animation: fadeInUp 350ms cubic-bezier(0, 0, 0.2, 1) both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 250ms cubic-bezier(0, 0, 0.2, 1) both;
+}
+
+.animate-badge-pop {
+  animation: badgePop 150ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.animate-shake {
+  animation: shake 300ms ease both;
+}
+
+.animate-spin-slow {
+  animation: spin 1s linear infinite;
+}
+
+.shimmer {
+  background: linear-gradient(90deg,
+      var(--skeleton-base) 25%,
+      var(--skeleton-highlight) 50%,
+      var(--skeleton-base) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+/* Hide scrollbar but keep scroll behavior */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
