@@ -10,6 +10,7 @@ import MovieHero from "@/components/movie/MovieHero";
 import CastList from "@/components/movie/CastList";
 import PlotSummary from "@/components/movie/PlotSummary";
 import SentimentCard from "@/components/movie/SentimentCard";
+import ShareButton from "@/components/shared/ShareButton";
 import { useMovie } from "@/hooks/useMovie";
 import { isValidImdbId } from "@/lib/validators";
 
@@ -33,15 +34,18 @@ export default function MoviePage({ params }: MoviePageProps) {
             <Navbar />
 
             <main className="max-w-4xl mx-auto px-4 sm:px-6 py-6">
-                {/* Back navigation */}
-                <Link
-                    href="/"
-                    className="inline-flex items-center gap-2 text-sm mb-6 transition-all hover:opacity-70"
-                    style={{ color: "var(--text-secondary)" }}
-                >
-                    <ArrowLeft size={16} />
-                    Back to Search
-                </Link>
+                {/* Top nav row: back link + share button */}
+                <div className="flex items-center justify-between mb-6">
+                    <Link
+                        href="/"
+                        className="inline-flex items-center gap-2 text-sm transition-all hover:opacity-70"
+                        style={{ color: "var(--text-secondary)" }}
+                    >
+                        <ArrowLeft size={16} />
+                        Back to Search
+                    </Link>
+                    {data && <ShareButton title={data.title} />}
+                </div>
 
                 {/* Loading state */}
                 {loading && <SkeletonLoader />}
