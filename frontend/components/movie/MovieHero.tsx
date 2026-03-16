@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Star, Film } from "lucide-react";
+import { Film } from "lucide-react";
+import RatingRing from "./RatingRing";
 
 interface MovieHeroProps {
     title: string;
@@ -14,8 +15,9 @@ interface MovieHeroProps {
 export default function MovieHero({ title, year, rating, genre, poster }: MovieHeroProps) {
     return (
         <div className="flex flex-col sm:flex-row gap-6 items-start">
-            {/* Poster */}
-            <div className="flex-shrink-0 mx-auto sm:mx-0">
+            {/* Poster + Rating Ring stacked */}
+            <div className="flex-shrink-0 flex flex-col items-center gap-3 mx-auto sm:mx-0">
+                {/* Poster */}
                 {poster ? (
                     <div
                         className="relative overflow-hidden rounded-xl transition-all duration-250"
@@ -61,6 +63,9 @@ export default function MovieHero({ title, year, rating, genre, poster }: MovieH
                         </span>
                     </div>
                 )}
+
+                {/* Rating Ring — centred below poster */}
+                <RatingRing rating={rating} size={88} />
             </div>
 
             {/* Movie Details */}
@@ -79,7 +84,7 @@ export default function MovieHero({ title, year, rating, genre, poster }: MovieH
 
                 {/* Meta row: year · genre */}
                 <div
-                    className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-3 text-sm"
+                    className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-4 text-sm"
                     style={{ color: "var(--text-secondary)" }}
                 >
                     <span>{year}</span>
@@ -90,27 +95,8 @@ export default function MovieHero({ title, year, rating, genre, poster }: MovieH
                         </>
                     )}
                 </div>
-
-                {/* IMDb Rating */}
-                {rating && rating !== "N/A" && (
-                    <div className="flex items-center gap-1.5 mb-4">
-                        <Star
-                            size={18}
-                            fill="currentColor"
-                            style={{ color: "var(--accent)" }}
-                        />
-                        <span
-                            className="font-semibold text-xl"
-                            style={{ color: "var(--accent)" }}
-                        >
-                            {rating}
-                        </span>
-                        <span className="text-sm" style={{ color: "var(--text-muted)" }}>
-                            / 10
-                        </span>
-                    </div>
-                )}
             </div>
         </div>
     );
 }
+
